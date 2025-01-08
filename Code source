@@ -1,0 +1,56 @@
+function analyserInfestations() {
+  const feuille = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const donnees = feuille.getDataRange().getValues();
+
+  let totalFeuillesInfestees = 0;
+  let totalFeuillesAvecPredateurs = 0;
+
+  for (let i = 1; i < donnees.length; i++) {
+    const nombreFeuillesInfestees = donnees[i][1]; // Colonne B : Nombre de feuilles infestées
+    const nombreFeuillesAvecPredateurs = donnees[i][2]; // Colonne C : Nombre de feuilles avec prédateurs
+    const nombreArbresCourant = i; // Nombre d'arbres jusqu'à la ligne actuelle
+    const totalFeuillesTheorique = 15 * nombreArbresCourant; // Calcul dynamique
+
+    totalFeuillesInfestees += nombreFeuillesInfestees;
+    totalFeuillesAvecPredateurs += nombreFeuillesAvecPredateurs;
+
+    if (i >= 5 && i <= 20) {
+      const pourcentageInfestation = (totalFeuillesInfestees / totalFeuillesTheorique) * 100;
+      const pourcentageFeuillesAvecPredateurs = (totalFeuillesAvecPredateurs / totalFeuillesTheorique) * 100;
+
+      let recommandation = "";
+
+      if (pourcentageFeuillesAvecPredateurs > 50) { // Prédateurs présents
+        if (pourcentageInfestation > 53) {
+          recommandation = "Traitement immédiat";
+        } else if (pourcentageInfestation >= 35) {
+          recommandation = "Inspecter un arbre de plus";
+        } else {
+          recommandation = "Retarder le traitement";
+        }
+      } else { // Prédateurs absents
+        if (pourcentageInfestation > 32) {
+          recommandation = "Traitement immédiat";
+        } else if (pourcentageInfestation >= 15) {
+          recommandation = "Inspecter un arbre de plus";
+        } else {
+          recommandation = "Retarder le traitement";
+        }
+      }
+
+      feuille.getRange(i + 1, 4).setValue(recommandation);
+
+      if (recommandation === "Traitement immédiat" || recommandation === "Retarder le traitement") {
+        break;
+      }
+    }
+  }
+}
+
+
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('Seuil d intervention des acariens')
+    .addItem('Analyser les infestations', 'analyserInfestations')
+    .addToUi();
+}
