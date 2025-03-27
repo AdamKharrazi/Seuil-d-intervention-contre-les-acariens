@@ -1,27 +1,31 @@
-![Seuil d'intervention des acariens _page-0001](https://github.com/user-attachments/assets/b11660af-3182-470f-b021-90499fd1873e)# Seuil-d-intervention-contre-les-acariens
-Il s'agit d'une application développée sur AppSheet à partir de feuilles de calcul codées en JavaScript. Cette application a pour objectif de faciliter la prise de décision concernant les interventions contre les acariens. 
-Etapes : 
+Mite Intervention Threshold
+This is an application developed on AppSheet, based on spreadsheets coded in JavaScript.
+Its objective is to facilitate decision-making regarding interventions against mites.
 
-  Échantillonnage
-    Nombre d’arbres : minimum 5 arbres (maximum 20 arbres si nécessaire).
-    Nombre de feuilles analysées : 15 feuilles par arbre.
-    
-Cas 1 : Présence de prédateurs
-Pourcentage de feuilles infestées < 35 % :
-Décision : Traitement retardé.
+Steps:
+Sampling
 
-Pourcentage de feuilles infestées entre 35 % et 53 % :
-Décision : Inspecter un arbre supplémentaire (jusqu’à un maximum de 20 arbres).
+Number of trees: minimum 5 trees (up to 20 trees if needed).
 
-Pourcentage de feuilles infestées > 53 % :
-Décision : Traitement immédiat.
+Number of leaves analyzed: 15 leaves per tree.
 
-Cas 2 : Absence de prédateurs
-Pourcentage de feuilles infestées < 15 % :
-Décision : Traitement retardé.
+Case 1: Presence of Predators
+Percentage of infested leaves < 35%
+Decision: Postpone treatment.
 
-Pourcentage de feuilles infestées entre 15 % et 32 % :
-Décision : Inspecter un arbre supplémentaire (jusqu’à un maximum de 20 arbres).
+Percentage of infested leaves between 35% and 53%
+Decision: Inspect one additional tree (up to a maximum of 20 trees).
 
-Pourcentage de feuilles infestées > 32 % :
-Décision : Traitement immédiat.
+Percentage of infested leaves > 53%
+Decision: Immediate treatment.
+
+Case 2: Absence of Predators
+Percentage of infested leaves < 15%
+Decision: Postpone treatment.
+
+Percentage of infested leaves between 15% and 32%
+Decision: Inspect one additional tree (up to a maximum of 20 trees).
+
+Percentage of infested leaves > 32%
+Decision: Immediate treatment.
+
